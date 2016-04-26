@@ -16,7 +16,7 @@ RSpec.describe "Items Actions", type: :request do
       expect(response.content_type).to eq("application/json")
     end
 
-    it "returns information on a customer" do
+    it "returns information on all items" do
       get '/api/v1/items'
 
       items = JSON.parse(response.body, symbolize_names: true)
@@ -27,6 +27,60 @@ RSpec.describe "Items Actions", type: :request do
       expect(parsed_item[:name]).to eq("adam1")
       expect(parsed_item[:description]).to eq("description1")
       expect(parsed_item[:image_url]).to eq("test.url.1")
+    end
+  end
+
+  describe "GET /api/v1/item/1" do
+    before(:each) do
+      @items = [Item.create(name: "adam1", description: "description1", image_url: "test.url.1"), Item.create(name: "adam2", description: "description2", image_url: "test.url.2"), Item.create(name: "adam3", description: "description3", image_url: "test.url.3")]
+    end
+
+    it "has 200 response code" do
+      get '/api/v1/items/1'
+      expect(response).to have_http_status(200)
+    end
+  #
+    it "renders json" do
+      get '/api/v1/items/1'
+      expect(response.content_type).to eq("application/json")
+    end
+
+    it "returns information on a specific item" do
+      get '/api/v1/items/1'
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(item.keys).to eq [:name, :description, :image_url]
+      expect(item[:name]).to eq("adam1")
+      expect(item[:description]).to eq("description1")
+      expect(item[:image_url]).to eq("test.url.1")
+    end
+  end
+
+  describe "DELETE /api/v1/item/1" do
+    before(:each) do
+      @items = [Item.create(name: "adam1", description: "description1", image_url: "test.url.1"), Item.create(name: "adam2", description: "description2", image_url: "test.url.2"), Item.create(name: "adam3", description: "description3", image_url: "test.url.3")]
+    end
+
+    it "has 204 response code" do
+      delete '/api/v1/items/1'
+      expect(response).to have_http_status(200)
+    end
+  #
+    it "renders json" do
+      delete '/api/v1/items/1'
+      expect(response.content_type).to eq("application/json")
+    end
+
+    it "returns information on a specific item" do
+      delete '/api/v1/items/1'
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(item.keys).to eq [:name, :description, :image_url]
+      expect(item[:name]).to eq("adam1")
+      expect(item[:description]).to eq("description1")
+      expect(item[:image_url]).to eq("test.url.1")
     end
   end
 end
