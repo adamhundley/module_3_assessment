@@ -24,6 +24,7 @@ end
 group :test do
   gem "vcr"
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'webmock'
 end
 
 group :development, :test do
@@ -31,6 +32,5 @@ group :development, :test do
   gem "pry", :require => "pry"
   gem 'rspec-rails', '~> 3.0'
   gem 'launchy'
-  gem 'webmock'
   gem 'database_cleaner'
 end

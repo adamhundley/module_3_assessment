@@ -5,16 +5,20 @@
     </div>
   </div>
   <div class="row"></div>
+  <div class="container">
+
   <% @products.each do |product| %>
-    <div class="col-sm-3" id="product-<%= product.sku %>">
+    <div class="col-md-3 product" id="product-<%= product.sku %>">
       <h5><%= product.name %></h5>
-      <%= image_tag(product.image) %>
+      <%= image_tag(product.image, class:"product-image") %>
       <p>
-        <%= product.short_description %>
-        SKU: <%= product.sku %>
-        Avg Review: <%= product.customer_average_review %>
-        $<%= product.sale_price %>
-      </p>
+        <%= product.short_description %><br>
+        </p>
+      <h4>SKU: <%= product.sku %></h4>
+      <h4>Avg Review: <%= product.customer_average_review %></h4>
+      <h4>$<%= product.sale_price %></h4>
+
     </div>
   <% end %>
+</div>
 </div>

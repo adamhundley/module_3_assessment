@@ -12,7 +12,7 @@ RSpec.feature "UserSearchesForProducts", type: :feature do
       click_on "search"
 
       expect(current_path).to eq "/search"
-      expect(page).to have_content "Sorry! It seems we can't find poop. Search again!"
+      expect(page).to have_content "Sorry! poop couldn't be found! Search again"
     end
   end
 end
