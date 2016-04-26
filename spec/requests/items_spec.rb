@@ -73,17 +73,40 @@ RSpec.describe "Items Actions", type: :request do
     end
 
     it "returns information on a specific item" do
+      expect(Item.count).to eq 3
+
       delete '/api/v1/items/1'
 
-      item = JSON.parse(response.body, symbolize_names: true)
+      expect(Item.count).to eq 2
+    end
+  end
 
+  describe "POST /api/v1/items" do
+    before(:each) do
+      @items = [Item.create(name: "adam1", description: "description1", image_url: "test.url.1"), Item.create(name: "adam2", description: "description2", image_url: "test.url.2"), Item.create(name: "adam3", description: "description3", image_url: "test.url.3")]
+    end
+
+    it "has 2041response code" do
+      post '/api/v1/items?name=adam4&description=description4&image_url=www.test.com.json'
+      expect(response).to have_http_status(200)
+    end
+  #
+    it "renders json" do
+      post '/api/v1/items?name=adam4&description=description4&image_url=www.test.com.json'
+      expect(response.content_type).to eq("application/json")
+    end
+
+    it "returns information on created item" do
+      expect(Item.count).to eq 3
+
+      post '/api/v1/items?name=adam4&description=description4&image_url=www.test.com'
+
+      item = JSON.parse(response.body, symbolize_names: true)
+      expect(Item.count).to eq 4
       expect(item.keys).to eq [:name, :description, :image_url]
-      expect(item[:name]).to eq("adam1")
-      expect(item[:description]).to eq("description1")
-      expect(item[:image_url]).to eq("test.url.1")
+      expect(item[:name]).to eq("adam4")
+      expect(item[:description]).to eq("description4")
+      expect(item[:image_url]).to eq("www.test.com")
     end
   end
 end
-
-#
-# When I send a GET request to /api/v1/items I receive a 200 JSON response containing all items And each item has a name, description, and image_url but not the created_at or updated_at
