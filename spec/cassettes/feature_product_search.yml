@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       X-Mashery-Responder:
-      - prod-j-worker-lax-02.mashery.com
+      - prod-j-worker-lax-03.mashery.com
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
@@ -27,7 +27,7 @@ http_interactions:
       Server:
       - thin 1.6.1 codename Death Proof
       Date:
-      - Tue, 26 Apr 2016 17:17:59 GMT
+      - Tue, 26 Apr 2016 17:46:07 GMT
       Connection:
       - close
     body:
@@ -167,5 +167,5 @@ http_interactions:
           ]
         }
     http_version: 
-  recorded_at: Tue, 26 Apr 2016 17:17:59 GMT
+  recorded_at: Tue, 26 Apr 2016 17:46:07 GMT
 recorded_with: VCR 3.0.1

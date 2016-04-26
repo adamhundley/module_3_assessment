@@ -5,8 +5,12 @@ class BestBuyService
   end
 
   def find(product)
+    products = product.split
+    search = products.each do |p|
+      p << "*"
+    end.join("%20")
     response = connection.get do |req|
-      req.url "/v1/products(longDescription=#{product}*)"
+      req.url "/v1/products(longDescription=#{search})"
       req.params['format'] = "json"
       req.params['show'] = "sku,name,customerReviewAverage,shortDescription,salePrice,image"
       req.params['pageSize'] = 15
