@@ -12,12 +12,25 @@ gem "faker"
 gem "therubyracer"
 gem "less-rails-bootstrap"
 gem "minitest-rails"
+gem "figaro"
+gem 'faraday'
+gem 'responders'
+gem "active_model_serializers", github: "rails-api/active_model_serializers"
 
 group :development do
   gem "spring"
 end
 
+group :test do
+  gem "vcr"
+  gem 'shoulda-matchers', '~> 3.1'
+end
+
 group :development, :test do
   gem "minitest-rails-capybara"
   gem "pry", :require => "pry"
+  gem 'rspec-rails', '~> 3.0'
+  gem 'launchy'
+  gem 'webmock'
+  gem 'database_cleaner'
 end
