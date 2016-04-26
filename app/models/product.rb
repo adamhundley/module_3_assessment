@@ -1,4 +1,10 @@
 class Product
+  attr_reader :sku,
+              :name,
+              :customer_average_review,
+              :short_description,
+              :sale_price,
+              :image
 
   def initialize(product_info)
     @sku = product_info[:sku]

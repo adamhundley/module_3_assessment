@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1><%= @products.count %> Products</h1>
+    </div>
+  </div>
+  <div class="row"></div>
+  <% @products.each do |product| %>
+    <div class="col-sm-3" id="product-<%= product.sku %>">
+      <h5><%= product.name %></h5>
+      <%= image_tag(product.image) %>
+      <p>
+        <%= product.short_description %>
+        SKU: <%= product.sku %>
+        Avg Review: <%= product.customer_average_review %>
+        $<%= product.sale_price %>
+      </p>
+    </div>
+  <% end %>
+</div>
